@@ -1,0 +1,48 @@
+name: Build NORMAX
+
+on:
+  push:
+    branches: [ "main", "master" ]
+  workflow_dispatch: {}
+
+jobs:
+  build:
+    runs-on: windows-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup .NET 8 SDK
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: "8.0.x"
+
+      - name: Restore
+        run: dotnet restore NORMAX.sln
+
+      - name: Publish self-contained win-x64 build
+        run: >
+          dotnet publish src\NORMAX\NORMAX.csproj
+          -c Release -r win-x64 --self-contained true
+          -p:PublishSingleFile=false
+          -o publish
+
+      - name: Install Inno Setup
+        run: choco install innosetup --no-progress -y
+
+      - name: Build installer (NORMAX_Setup.exe)
+        run: |
+          & "C:\Program Files (x86)\Inno Setup 6\ISCC.exe" installer\NORMAX.iss
+
+      - name: Upload portable build
+        uses: actions/upload-artifact@v4
+        with:
+          name: NORMAX-portable
+          path: publish\**
+
+      - name: Upload installer
+        uses: actions/upload-artifact@v4
+        with:
+          name: NORMAX-installer
+          path: installer_output\NORMAX_Setup.exe
