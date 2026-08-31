@@ -1,0 +1,73 @@
+<Window x:Class="NORMAX.Views.SettingsWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="NORMAX Settings" Height="560" Width="400"
+        Background="{StaticResource BgBrush}"
+        WindowStartupLocation="CenterOwner"
+        ResizeMode="NoResize"
+        FontFamily="Segoe UI">
+    <ScrollViewer VerticalScrollBarVisibility="Auto" Padding="24">
+        <StackPanel>
+            <TextBlock Text="Settings" FontSize="22" FontWeight="Bold" Style="{StaticResource BaseText}" Margin="0,0,0,16"/>
+
+            <TextBlock Text="VIDEO AREA SIZE" FontSize="11" Foreground="{StaticResource TextSecondaryBrush}"/>
+            <Grid Margin="0,8,0,4">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                <Slider x:Name="PercentageSlider" Minimum="50" Maximum="95" TickFrequency="5" IsSnapToTickEnabled="True"
+                        ValueChanged="PercentageSlider_ValueChanged" VerticalAlignment="Center"/>
+                <TextBlock x:Name="PercentageLabel" Grid.Column="1" Text="82%" Margin="10,0,0,0"
+                           Style="{StaticResource BaseText}" VerticalAlignment="Center" Width="42"/>
+            </Grid>
+            <TextBlock Text="How much of the screen the video panel fills. The rest stays pure black."
+                       FontSize="11" Foreground="{StaticResource TextSecondaryBrush}" TextWrapping="Wrap" Margin="0,0,0,20"/>
+
+            <TextBlock Text="VIDEO POSITION" FontSize="11" Foreground="{StaticResource TextSecondaryBrush}"/>
+            <Grid Margin="0,8,0,4">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock Text="H" Style="{StaticResource BaseText}" VerticalAlignment="Center" Width="14"/>
+                <Slider x:Name="HorizontalOffsetSlider" Grid.Column="1" Minimum="-20" Maximum="20"
+                        ValueChanged="OffsetSlider_ValueChanged" VerticalAlignment="Center" Margin="8,0"/>
+                <TextBlock x:Name="HorizontalOffsetLabel" Grid.Column="2" Text="0%" Style="{StaticResource BaseText}"
+                           VerticalAlignment="Center" Width="32"/>
+            </Grid>
+            <Grid Margin="0,4,0,4">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock Text="V" Style="{StaticResource BaseText}" VerticalAlignment="Center" Width="14"/>
+                <Slider x:Name="VerticalOffsetSlider" Grid.Column="1" Minimum="-20" Maximum="20"
+                        ValueChanged="OffsetSlider_ValueChanged" VerticalAlignment="Center" Margin="8,0"/>
+                <TextBlock x:Name="VerticalOffsetLabel" Grid.Column="2" Text="0%" Style="{StaticResource BaseText}"
+                           VerticalAlignment="Center" Width="32"/>
+            </Grid>
+            <Button Content="Reset to center" Style="{StaticResource GhostButton}" Width="Auto" Height="28"
+                    Padding="12,4" FontSize="12" HorizontalAlignment="Left" Click="ResetPosition_Click" Margin="0,4,0,4"/>
+            <TextBlock Text="Fine-tune the panel away from dead-center if you'd like. 0% keeps it exactly in the middle."
+                       FontSize="11" Foreground="{StaticResource TextSecondaryBrush}" TextWrapping="Wrap" Margin="0,0,0,20"/>
+
+            <TextBlock Text="DISPLAY" FontSize="11" Foreground="{StaticResource TextSecondaryBrush}"/>
+            <ComboBox x:Name="MonitorComboBox" Margin="0,8,0,20" SelectionChanged="MonitorComboBox_SelectionChanged"/>
+
+            <TextBlock Text="STARTUP" FontSize="11" Foreground="{StaticResource TextSecondaryBrush}" Margin="0,0,0,4"/>
+            <CheckBox x:Name="StartWithWindowsCheck" Content="Start NORMAX with Windows" Checked="Setting_Changed" Unchecked="Setting_Changed"/>
+            <CheckBox x:Name="AutoStartPlaybackCheck" Content="Automatically start playback" Checked="Setting_Changed" Unchecked="Setting_Changed"/>
+            <CheckBox x:Name="RememberFolderCheck" Content="Remember last selected folder" Checked="Setting_Changed" Unchecked="Setting_Changed"/>
+
+            <TextBlock Text="PLAYBACK" FontSize="11" Foreground="{StaticResource TextSecondaryBrush}" Margin="0,16,0,4"/>
+            <CheckBox x:Name="LoopPlaylistCheck" Content="Loop playlist" Checked="Setting_Changed" Unchecked="Setting_Changed"/>
+            <CheckBox x:Name="ShufflePlaylistCheck" Content="Shuffle playlist" Checked="Setting_Changed" Unchecked="Setting_Changed"/>
+            <CheckBox x:Name="RememberLastVideoCheck" Content="Remember last video on restart" Checked="Setting_Changed" Unchecked="Setting_Changed"/>
+
+            <Button Content="Done" Style="{StaticResource AccentButton}" Margin="0,28,0,0" Click="Done_Click"/>
+        </StackPanel>
+    </ScrollViewer>
+</Window>

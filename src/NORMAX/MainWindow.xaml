@@ -1,0 +1,77 @@
+<Window x:Class="NORMAX.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="NORMAX" Height="560" Width="420"
+        Background="{StaticResource BgBrush}"
+        WindowStartupLocation="CenterScreen"
+        ResizeMode="NoResize"
+        FontFamily="Segoe UI">
+    <Grid Margin="28">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <!-- Header -->
+        <Grid Grid.Row="0" Margin="0,0,0,4">
+            <StackPanel>
+                <TextBlock Text="NORMAX" FontSize="30" FontWeight="Bold" Style="{StaticResource BaseText}"/>
+                <TextBlock Text="Desktop Video Environment" FontSize="13" Foreground="{StaticResource TextSecondaryBrush}" Margin="2,2,0,0"/>
+            </StackPanel>
+            <Button x:Name="SettingsButton" Style="{StaticResource GhostButton}" Content="&#9881;" FontSize="18"
+                    HorizontalAlignment="Right" VerticalAlignment="Top" Click="SettingsButton_Click" ToolTip="Settings"/>
+        </Grid>
+
+        <!-- Folder selection -->
+        <Border Grid.Row="1" Background="{StaticResource PanelBrush}" CornerRadius="10" Margin="0,20,0,0" Padding="16">
+            <StackPanel>
+                <Button x:Name="SelectFolderButton" Content="Select Video Folder" Style="{StaticResource AccentButton}"
+                        HorizontalAlignment="Stretch" Click="SelectFolderButton_Click"/>
+                <TextBlock x:Name="FolderPathText" Text="No folder selected" FontSize="12"
+                           Foreground="{StaticResource TextSecondaryBrush}" Margin="0,10,0,0" TextTrimming="CharacterEllipsis"/>
+            </StackPanel>
+        </Border>
+
+        <!-- Now playing -->
+        <Border Grid.Row="2" Background="{StaticResource PanelBrush}" CornerRadius="10" Margin="0,12,0,0" Padding="16">
+            <StackPanel>
+                <TextBlock Text="NOW PLAYING" FontSize="11" Foreground="{StaticResource TextSecondaryBrush}"/>
+                <TextBlock x:Name="NowPlayingText" Text="Nothing playing" FontSize="15" Margin="0,6,0,0"
+                           Style="{StaticResource BaseText}" TextTrimming="CharacterEllipsis"/>
+                <TextBlock x:Name="StatusText" Text="" FontSize="12" Foreground="{StaticResource TextSecondaryBrush}" Margin="0,4,0,0"/>
+            </StackPanel>
+        </Border>
+
+        <!-- Transport controls -->
+        <StackPanel Grid.Row="3" Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,18,0,0">
+            <Button x:Name="PreviousButton" Style="{StaticResource GhostButton}" Content="&#9198;" Click="PreviousButton_Click" Margin="0,0,10,0"/>
+            <Button x:Name="PlayPauseButton" Style="{StaticResource GhostButton}" Content="&#9654;" Width="54" Height="54" FontSize="20" Click="PlayPauseButton_Click" Margin="0,0,10,0"/>
+            <Button x:Name="NextButton" Style="{StaticResource GhostButton}" Content="&#9197;" Click="NextButton_Click" Margin="0,0,10,0"/>
+            <Button x:Name="RestartButton" Style="{StaticResource GhostButton}" Content="&#8635;" Click="RestartButton_Click"/>
+        </StackPanel>
+
+        <!-- Volume -->
+        <Grid Grid.Row="4" Margin="0,20,0,0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Button x:Name="MuteButton" Grid.Column="0" Style="{StaticResource GhostButton}" Content="&#128266;" FontSize="16" Click="MuteButton_Click"/>
+            <Slider x:Name="VolumeSlider" Grid.Column="1" Minimum="0" Maximum="100" Margin="12,0,0,0"
+                    VerticalAlignment="Center" ValueChanged="VolumeSlider_ValueChanged"/>
+        </Grid>
+
+        <!-- Start/stop background -->
+        <Button x:Name="StartStopButton" Grid.Row="5" Content="Start Background" Style="{StaticResource AccentButton}"
+                Margin="0,22,0,0" Click="StartStopButton_Click"/>
+
+        <TextBlock Grid.Row="7" Text="NORMAX v1.0 — runs fully offline" FontSize="11"
+                   Foreground="{StaticResource TextSecondaryBrush}" HorizontalAlignment="Center" Margin="0,10,0,0"/>
+    </Grid>
+</Window>
